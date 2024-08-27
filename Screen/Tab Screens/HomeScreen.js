@@ -3,35 +3,39 @@ import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import TopMealsScreen from './TopMealsScreen';
+import { useNavigation } from '@react-navigation/native';
+import { useCart } from '../../Cart/CartProvider';
+
+
+
 
 export default function HomeScreen() {
-  const [meal, setMeal] =useState([])
-  const [isLoading, SetIsLoading] =useState(true)
-  const [refreshing, setRefreshing] = useState(false)
-  const [randomMeals, setRandomMeals] =useState([])
-
+  const [meal, setMeal] =useState([]);
+  const [isLoading, SetIsLoading] =useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [randomMeals, setRandomMeals] =useState([]);
+  const {addToCart} =useCart();
+  const navigation = useNavigation();
   const FetchFuredMeal = async ()=>{
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
-    const data = await response.json();
-    setMeal(data.categories);
-    SetIsLoading(false);
+    try{
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
+      const data = await response.json();
+      setMeal(data.categories);
+      SetIsLoading(false);
 
+    }catch(error){
+      console.error(error);
+      SetIsLoading(false);
+    }
   }
-
-  // const FetchRandomMeals = async ()=>{
-  //   const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
-  //   const data = await response.json();
-  //   setRandomMeals(data);
-  // }
-
-
-
   const renderMealItem =({item}) =>{
     return (
       <View key={item.idCategory} style={styles.card}>
-        <Image source={{uri :item.strCategoryThumb }} style={styles.mealImage}/>
-        <Text>{item.strCategory}</Text>
-        <Text>{}</Text>
+        <TouchableOpacity onPress={()=> navigation.navigate(item.strCategory)}>
+          <Image source={{uri :item.strCategoryThumb }} style={styles.mealImage}/>
+          <Text style={{textAlign:"center"}}>{item.strCategory}</Text>
+          <Text>{}</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -68,7 +72,7 @@ export default function HomeScreen() {
             }}> <Text style={{fontSize:30}} >W</Text>elcome🏵</Text>
 
             <TouchableOpacity>
-              <MaterialIcons name="shopping-cart" size={24} color="black" /> 
+            <MaterialIcons name="star" size={25} color='red' />
             </TouchableOpacity>
         </View>
 
@@ -81,7 +85,7 @@ export default function HomeScreen() {
               renderItem={renderMealItem}
               keyExtractor={(item)=>item.idCategory}
               horizontal
-              contentContainerStyle={styles.listContent}
+              // contentContainerStyle={styles.listContent}
           />
 
         
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff'
   },
   card: {
-    borderWidth:1,
+    // borderWidth:1,
     width: 100,
     height: 100,
     padding: 10,
@@ -119,7 +123,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
   },
-  listContent:{
-    paddingBottom: 20,
-  },
+  // listContent:{
+  //   paddingBottom: 20,
+  // }
 })

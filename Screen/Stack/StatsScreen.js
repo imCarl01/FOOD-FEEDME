@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function FavouriteScreen() {
+export default function StatsScreen() {
   return (
     <View>
-      <Text>FavouriteScreen</Text>
+      <Text>StatsScreen</Text>
     </View>
   )
 }

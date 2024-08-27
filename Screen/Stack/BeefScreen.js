@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Image, SafeAreaView, ActivityIndicator, TouchableOpacity} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useCart } from '../../Cart/CartProvider';
 
-export default function HomeScreen() {
+export default function BeefScreen() {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {addToCart} = useCart();
 
-  const fetchMeals = async () => {
+  const fetchBeefMeals = async () => {
     try {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian');
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef');
       const data = await response.json();
       setMeals(data.meals);
       setIsLoading(false);
@@ -22,7 +21,7 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
-    fetchMeals();
+    fetchBeefMeals();
   }, []);
 
   if (isLoading) {
@@ -34,30 +33,25 @@ export default function HomeScreen() {
     );
   }
 
-  const renderMealItem = ({ item }) => (
-    <View style={styles.mealContainer}>
-      <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
-      <View style={{flex:1,flexDirection:"row", alignItems:"center",justifyContent:"space-between" , width: "90%"}}>
-        <Text style={styles.mealTitle}>{item.strMeal}</Text>
-        <TouchableOpacity onPress={() => addToCart(item)} >
-         <MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
-        </TouchableOpacity>
-      </View>
-
-    </View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
-        {/* <Text style={{fontSize:40,}}>🤤</Text> */}
       <FlatList
         data={meals}
-        renderItem={renderMealItem}
+        renderItem={({ item }) => (
+          <View style={styles.mealContainer}>
+            <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
+            <Text style={styles.mealTitle}>{item.strMeal}</Text>
+
+            <TouchableOpacity onPress={() => addToCart(item)} >
+                  <MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+            </TouchableOpacity>
+          </View>
+        )}
         keyExtractor={(item) => item.idMeal}
         numColumns={2}
-        key={(numColumns)=>numColumns.toString()}
-        // horizontal={efals}
+        key={(numColumns) => numColumns.toString()}
         showsHorizontalScrollIndicator={false}
+        
       />
     </SafeAreaView>
   );
@@ -66,36 +60,28 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // padding: 5,
+    padding: 10,
   },
   loadingContainer: {
     flex: 1,
-   
-    
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   mealContainer: {
     flex:1,
-    marginRight: 15,
-    marginLeft: 15,
+    marginBottom: 15,
     alignItems: 'center',
-    padding: 5,
-  },
-  mealImage: {
-    width: '100%',
-    height: 120,
-    flexDirection:"column",
-    borderRadius: 10,
-    margin: 5,
     
   },
+  mealImage: {
+    width: '90%',
+    height: 120,
+    borderRadius: 10,
+    margin:5,
+  },
   mealTitle: {
-    marginBottom: 5,
+    marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',
   },
 });

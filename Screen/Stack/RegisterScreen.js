@@ -44,7 +44,7 @@ export default function RegisterScreen() {
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.container}>
         <View>
-          <Text style={{fontSize:40,fontWeight:"bold" }}>Feed Me</Text>
+          <Text style={{fontSize:40,fontWeight:"bold"}}>Feed Me</Text>
         </View>
         <View style={styles.header}>
           <Image 

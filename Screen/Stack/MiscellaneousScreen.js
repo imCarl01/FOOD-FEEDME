@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, FlatList, Image, SafeAreaView, ActivityIndicato
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useCart } from '../../Cart/CartProvider';
 
-export default function PastaScreen() {
+export default function MiscellaneousScreen() {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const {addToCart} = useCart();
 
   const fetchBeefMeals = async () => {
     try {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Pasta');
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Miscellaneous');
       const data = await response.json();
 
       const mealsWithPrices = data.meals.map(meal => ({

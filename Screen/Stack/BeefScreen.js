@@ -12,7 +12,13 @@ export default function BeefScreen() {
     try {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef');
       const data = await response.json();
-      setMeals(data.meals);
+
+      const mealsWithPrices = data.meals.map(meal => ({
+        ...meal,
+        price: Math.floor(Math.random() * 10000) + 1000, // Assign random prices between $10 and $100
+      }));
+      setMeals(mealsWithPrices)
+      // setMeals(data.meals);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -40,7 +46,12 @@ export default function BeefScreen() {
         renderItem={({ item }) => (
           <View style={styles.mealContainer}>
             <Image source={{ uri: item.strMealThumb }} style={styles.mealImage} />
-            <Text style={styles.mealTitle}>{item.strMeal}</Text>
+            {/* */}
+
+            <View>
+                <Text style={styles.mealT}>{item.strMeal}</Text>
+                <Text style={styles.mealP}>₦{item.price.toFixed(2)}</Text>
+            </View>
 
             <TouchableOpacity onPress={() => addToCart(item)} >
                   <MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
@@ -83,5 +94,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  mealT: {
+    marginBottom: 5,
+    fontSize: 12,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  mealP: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'green',
+    textAlign: 'center',
   },
 });

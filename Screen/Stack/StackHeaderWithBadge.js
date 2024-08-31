@@ -2,14 +2,20 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useCart } from '../../Cart/CartProvider'; // Assuming you have a useCart hook to get the cart count
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function StackHeaderWithBadge() {
   const { cart } = useCart();
   const cartItemCount = cart.length; // Replace this with the logic to get the cart item count
+  const navigation = useNavigation();
 
   return (
     <View style={{ paddingRight: 10 }}>
-      <MaterialIcons name="shopping-cart" size={25} color="black" />
+      <TouchableOpacity onPress={()=>navigation.navigate("Cart")}>
+          <MaterialIcons name="shopping-cart" size={25} color="black" />  
+      </TouchableOpacity>
+      
       {cartItemCount > 0 && (
         <View style={styles.badge}>
           <Text style={styles.badgeText}>{cartItemCount}</Text>

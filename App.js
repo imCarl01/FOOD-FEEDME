@@ -28,7 +28,10 @@ import InviteFirends from './Screen/Stack/InviteFirends';
 import HelpScreen from './Screen/Stack/HelpScreen';
 
 import { CartProvider, useCart } from './Cart/CartProvider';
+
 import StackHeaderWithBadge from './Screen/Stack/StackHeaderWithBadge';
+import Payment from './Screen/Stack/Payment';
+import MiscellaneousScreen from './Screen/Stack/MiscellaneousScreen';
 
 
 
@@ -76,18 +79,35 @@ export default function App(){
       <Stack.Screen name='Beef' component={BeefScreen} options={{headerShown: true, 
         headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>}}/>
 
-      <Stack.Screen name='Chicken' component={ChickenScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Dessert' component={DessertScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Lamb' component={LambScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Pasta' component={PastaScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Pork' component={PorkScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Seafood' component={SeafoodScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Side' component={SideScreen} options={{headerShown: true}}/>
-      <Stack.Screen name='Edit' component={EditScreen} options={{headerShown: true}}/>
+      <Stack.Screen name='Chicken' component={ChickenScreen} options={{headerShown: true,
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+       }}/>
+      <Stack.Screen name='Dessert' component={DessertScreen} options={{headerShown: true, 
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+      }}/>
+      <Stack.Screen name='Lamb' component={LambScreen} options={{headerShown: true, 
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+      }}/>
+      <Stack.Screen name='Pasta' component={PastaScreen} options={{headerShown: true,
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+      }}/>
+      <Stack.Screen name='Pork' component={PorkScreen} options={{headerShown: true,
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+      }}/>
+      <Stack.Screen name='Seafood' component={SeafoodScreen} options={{headerShown: true,
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+      }}/>
+      <Stack.Screen name='Side' component={SideScreen} options={{headerShown: true,
+        headerRight:()=><StackHeaderWithBadge/>, tabBarIcon: ()=><MaterialIcons name='add-shopping-cart' size={30} color='orange'/>
+      }}/>
+      <Stack.Screen name='Miscellaneous' component={MiscellaneousScreen} options={{headerShown: true,}}/>
+      <Stack.Screen name='Edit' component={EditScreen} options={{headerShown: true,}}/>
       <Stack.Screen name='Stat' component={StatsScreen} options={{headerShown: true}}/>
       <Stack.Screen name='Setting' component={SettingsScreen} options={{headerShown: true}}/>
       <Stack.Screen name='Invite' component={InviteFirends} options={{headerShown: true}}/>
       <Stack.Screen name='Help' component={HelpScreen} options={{headerShown: true}}/>
+      
+      <Stack.Screen name='Payment' component={Payment} options={{headerShown: true}}/>
     </Stack.Navigator>
     </NavigationContainer>
     </CartProvider>

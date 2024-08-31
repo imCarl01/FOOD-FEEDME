@@ -44,15 +44,15 @@ export default function RegisterScreen() {
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.container}>
         <View>
-          <Text style={{fontSize:40,fontWeight:"bold"}}>Feed Me</Text>
+          <Text style={{fontSize:40,fontWeight:"bold"}}>Sign Up</Text>
         </View>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <Image 
             source={require('./image/images__1_-removebg-preview.png')}
             style={styles.image}
           />
           <Text style={styles.headerText}>Register</Text>
-        </View>
+        </View> */}
 
         <View style={styles.secondContainer}>
           <Text style={styles.text}>Username</Text>

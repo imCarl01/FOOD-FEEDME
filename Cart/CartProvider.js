@@ -12,8 +12,12 @@ export const CartProvider = ({ children }) => {
 
   };
 
+  const deleteFromCart =(idMeal)=>{
+    setCart((prevCart)=>prevCart.filter((item)=> item.idMeal !== idMeal));
+  };
+
   return (
-    <CartContext.Provider value={{ cartCount, cart ,addToCart}}>
+    <CartContext.Provider value={{ cartCount, cart ,addToCart, deleteFromCart}}>
       {children}
     </CartContext.Provider>
   );

@@ -12,7 +12,7 @@ function StackHeaderWithBadge() {
 
   return (
     <View style={{ paddingRight: 10 }}>
-      <TouchableOpacity onPress={()=>navigation.navigate("Cart")}>
+      <TouchableOpacity onPress={()=>navigation.navigate("Cart")} >
           <MaterialIcons name="shopping-cart" size={25} color="black" />  
       </TouchableOpacity>
       

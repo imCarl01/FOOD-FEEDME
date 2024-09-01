@@ -62,11 +62,17 @@ export default function CartScreen() {
         keyExtractor={(item) => item.idMeal.toString()}
       />
       <View style={styles.totalContainer}>
-        <TouchableOpacity onPress={()=>navigation.navigate("Payment")}>
+        <TouchableOpacity >
           <Text style={styles.totalText}>Total:₦{calculateTotal().toFixed(2)}</Text>
         </TouchableOpacity>
-        
       </View>
+
+      <View style={styles.totalContainer}>
+            <TouchableOpacity onPress={()=>navigation.navigate("Payment", 
+                {totalAmount: calculateTotal(), cartItems: cart} )}>
+                <Text style={styles.totalText}>Check out</Text>
+              </TouchableOpacity>
+            </View>
     </View>
   );
 }
@@ -124,12 +130,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   totalContainer: {
-    marginTop: 20,
+    // marginTop: 20,
+    marginBottom: 10,
     alignItems: 'center',
     backgroundColor: 'orange',
-    height: 50,
-    justifyContent: 'center',
+    height:50,
+    justifyContent:"center",
     borderRadius: 10,
+  },
+  total:{
+    borderWidth:1,
   },
   totalText: {
     fontSize: 30,
